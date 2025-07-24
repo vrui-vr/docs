@@ -1,0 +1,89 @@
+site_name: VRUI
+
+repo_url: https://github.com/vrui-vr
+repo_name: vrui-vr
+
+nav:
+  - Home: index.md
+
+plugins: # https://github.com/mkdocs/catalog?tab=readme-ov-file#-theming
+  - search
+  # - social
+  # - smarty
+
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - footnotes
+  - tables
+  # https://facelessuser.github.io/pymdown-extensions
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.arithmatex:
+      generic: true
+  # - pymdownx.superfences:
+  #     custom_fences:
+  #       - name: mermaid
+  #         class: mermaid
+  #         format: !!python/name:pymdownx.superfences.fence_code_format
+  - toc:
+      title: On this page
+      permalink: true
+
+theme:
+  name: material # https://squidfunk.github.io/mkdocs-material/
+  custom_dir: overrides
+  font: false # for privacy reasons
+  icon:
+    repo: fontawesome/brands/github
+  # logo: assets/logo.jpeg
+  features:
+    - announce.dismiss
+    - content.code.annotate
+    - content.code.copy
+    - content.tooltips
+    - navigation.footer
+    - navigation.indexes
+    - navigation.instant.preview
+    - navigation.path
+    - navigation.sections
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - search.highlight
+    - search.suggest
+    - search.share
+    - toc.follow
+
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-night
+        name: Switch to system preference
+
+extra_javascript:
+  - javascripts/config.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
