@@ -2,7 +2,9 @@ import yaml
 from pathlib import Path
 
 # paths to all external mkdocs-nav.yml files
-EXTERNAL_NAV_FILES = list(Path("docs").rglob("nav.yml"))
+EXTERNAL_NAV_FILES = [p for p in Path("docs").glob("*") if p.is_dir()]
+EXTERNAL_NAV_FILES = [p / "nav.yml" for p in EXTERNAL_NAV_FILES if (p / "nav.yml").exists()]
+
 
 def prefix_nav(fragment, repo_name):
     """Prefix all markdown file paths in the nav structure with the repo directory."""
