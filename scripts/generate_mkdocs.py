@@ -7,7 +7,6 @@ EXTERNAL_NAV_FILES = [p / "nav.yml" for p in EXTERNAL_NAV_FILES if (p / "nav.yml
 
 
 def prefix_nav(fragment, repo_name):
-    """Prefix all markdown file paths in the nav structure with the repo directory."""
     def prefix_entry(entry):
         if isinstance(entry, dict):
             new_entry = {}
