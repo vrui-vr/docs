@@ -18,21 +18,19 @@ for NAME in "${REPO_NAMES[@]}"; do
   REPOS+=("$(realpath "$DOCS_REPO_ROOT/../$NAME")")
 done
 
+# Link each repo's docs directory into our unified docs folder
 for REPO_PATH in "${REPOS[@]}"; do
-  REPO_PATH="$(realpath "$REPO_PATH")"  # Resolve symlinks/relative paths
+  REPO_PATH="$(realpath "$REPO_PATH")"
   REPO_NAME="$(basename "$REPO_PATH")"
-  DEST_DIR="$EXTERNAL_DIR/$REPO_NAME"
-
-  echo "Cleaning and preparing $DEST_DIR..."
-  rm -rf $DEST_DIR # remove old docs
-  mkdir -p "$DEST_DIR" # recreate the dir
-
+  DEST_LINK="$EXTERNAL_DIR/$REPO_NAME"
   DOCS_SRC="$REPO_PATH/docs"
 
+  echo "Preparing symlink for $REPO_NAME..."
+
+  rm -rf "$DEST_LINK"  # Remove any old content or link
   if [ -d "$DOCS_SRC" ]; then
-    echo "Copying docs from $DOCS_SRC → $DEST_DIR"
-    cp -r "$DOCS_SRC/"* "$DEST_DIR/" 2>/dev/null || echo "⚠️ Docs directory exists but is empty"
-    cp "$DOCS_SRC/nav.yml" "$DEST_DIR/" 2>/dev/null || echo "⚠️ No nav.yml found in $DOCS_SRC"
+    ln -s "$DOCS_SRC" "$DEST_LINK"
+    echo "✅ Linked $DOCS_SRC → $DEST_LINK"
   else
     echo "⚠️ Skipping $REPO_NAME: no docs directory found"
   fi
@@ -42,9 +40,15 @@ echo "Generating mkdocs.yml..."
 python "$DOCS_REPO_ROOT/scripts/generate_mkdocs.py"
 
 echo "Starting local MkDocs server..."
-mkdocs serve --config-file "$DOCS_REPO_ROOT/mkdocs.generated.yml" --watch "$DOCS_REPO_ROOT/overrides"
+mkdocs serve \
+  --config-file "$DOCS_REPO_ROOT/mkdocs.generated.yml" \
+  --watch "$DOCS_REPO_ROOT/overrides" \
+  $(for PATH in "${REPOS[@]}"; do echo "--watch $PATH/docs"; done)
 
-# clean up
-for REPO_PATH in "${REPOS[@]}"; do
-  rm -rf $DEST_DIR # remove old docs
+# Clean up symlinks after server stops
+echo "Cleaning up symlinks..."
+for REPO_NAME in "${REPO_NAMES[@]}"; do
+  rm -rf "$EXTERNAL_DIR/$REPO_NAME"
 done
+
+echo "✅ Done."
