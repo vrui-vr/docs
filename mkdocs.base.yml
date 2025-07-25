@@ -19,7 +19,7 @@ validation:
 
 markdown_extensions:
   - abbr
-  - admonition
+  - admonition # https://3os.org/utilities/markdown-cheatsheet/admonition/#supported-types
   - footnotes
   - tables
   # https://facelessuser.github.io/pymdown-extensions
