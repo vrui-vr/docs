@@ -1,10 +1,7 @@
 import yaml
 from pathlib import Path
 
-# paths to all external mkdocs-nav.yml files
-EXTERNAL_NAV_FILES = [p for p in Path("docs").glob("*") if p.is_dir()]
-EXTERNAL_NAV_FILES = [p / "nav.yml" for p in EXTERNAL_NAV_FILES if (p / "nav.yml").exists()]
-
+REPOS_FILE = "repos.txt"
 
 def prefix_nav(fragment, repo_name):
     def prefix_entry(entry):
@@ -12,10 +9,8 @@ def prefix_nav(fragment, repo_name):
             new_entry = {}
             for title, value in entry.items():
                 if isinstance(value, str):
-                    # Simple case: single file
                     new_entry[title] = f"{repo_name}/{value}"
                 elif isinstance(value, list):
-                    # Mixed: could be strings or nested dicts
                     new_value = []
                     for item in value:
                         if isinstance(item, str):
@@ -43,12 +38,14 @@ def main():
     base = load_yaml("mkdocs.base.yml")
     base_nav = base.get("nav", [])
 
-    # extend the base nav with fragments
-    for nav_path in EXTERNAL_NAV_FILES:
+    with open(REPOS_FILE, "r") as f:
+        repos = [line.strip() for line in f if line.strip()]
+
+    for repo_name in repos:
+        nav_path = Path("docs") / repo_name / "nav.yml"
         print(f"Grabbing nav from {nav_path}")
-        if Path(nav_path).exists():
+        if nav_path.exists():
             fragment = load_yaml(nav_path)
-            repo_name = nav_path.parts[1]
             if isinstance(fragment, list):
                 base_nav.extend(prefix_nav(fragment, repo_name))
             else:
