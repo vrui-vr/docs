@@ -2,6 +2,9 @@
 
 # testing stuff
 mkdocs.generated.yml
+docs/arsandbox
+docs/vrui
+docs/kinect
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -206,3 +209,5 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+.vscode/
