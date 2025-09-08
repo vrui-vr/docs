@@ -46,6 +46,12 @@ Most of the existing repositories in the VRUI organization already have access t
 
 Important!!! The `DOCS_DEPLOY_TOKEN` secret value is based on a personal access token (PAT) that is owned by a specific user (currently me: @nredick). It is set to never expire, but if that user leaves the organization, the token will need to be regenerated and updated in the organization secrets to someone else with permissions to make changes to the repos. In short, the PAT behind the `DOCS_DEPLOY_TOKEN` secret allows the repos to act on the user's behalf to tell `vrui-vr/docs` that it's time to rebuild (which requires a certain level of permissions).
 
+What this looks like:
+
+![Screenshot of GH Actions run](assets/media/gh-run.png)
+
+A new build and deploy job is triggered, and appears to be "manually" run by the user who owns the PAT (currently me: @nredick).
+
 ## Getting started: adding documentation for a new repo
 
 1. Ensure the new repo has a `docs/` directory with an `index.md` file.
