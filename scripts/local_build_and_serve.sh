@@ -15,7 +15,13 @@ REPO_NAMES=($(<"$DOCS_REPO_ROOT/repos.txt"))
 # Build full paths (e.g., ../arsandbox)
 REPOS=()
 for NAME in "${REPO_NAMES[@]}"; do
-  REPOS+=("$(realpath "$DOCS_REPO_ROOT/../$NAME")")
+  REPO_PATH="$(realpath "$DOCS_REPO_ROOT/../$NAME" 2>/dev/null || true)"
+  if [ -z "$REPO_PATH" ] || [ ! -d "$REPO_PATH" ]; then
+    echo "⚠️ Skipping $NAME: local repo not found"
+    continue
+  fi
+
+  REPOS+=("$REPO_PATH")
 done
 
 # Link each repo's docs directory into our unified docs folder
