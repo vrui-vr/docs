@@ -1,7 +1,9 @@
 name: Build & Deploy Docs
 
 permissions:
-  contents: write
+  contents: read       # 'read' is sufficient for checkout
+  pages: write         # Required to deploy to Pages
+  id-token: write      # Required to verify the deployment
 
 on:
   push:
@@ -11,6 +13,9 @@ on:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout main repo
@@ -30,5 +35,15 @@ jobs:
       - name: Generate mkdocs.yml
         run: python scripts/generate_mkdocs.py
 
+      - name: Build MkDocs
+        # Changed: Build the site locally instead of deploying to a branch
+        run: mkdocs build --config-file mkdocs.generated.yml
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'site' # MkDocs defaults to outputting to the 'site' directory
+
       - name: Deploy to GitHub Pages
-        run: mkdocs gh-deploy --config-file mkdocs.generated.yml --force
+        id: deployment
+        uses: actions/deploy-pages@v4
