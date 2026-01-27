@@ -5,7 +5,10 @@ repo_url: https://github.com/vrui-vr
 repo_name: vrui-vr
 
 nav:
-  - Home: index.md
+  - Home:
+      - index.md
+      - Contributing: CONTRIBUTING.md
+      - Code of Conduct: CODE_OF_CONDUCT.md
 
 plugins: # https://github.com/mkdocs/catalog?tab=readme-ov-file#-theming
   - search
