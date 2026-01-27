@@ -27,7 +27,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install dependencies
-        run: pip install mkdocs mkdocs-material pyyaml
+        run: pip install mkdocs mkdocs-material pyyaml mkdocs-github-admonitions-plugin
 
       - name: Clone and stage external docs
         run: bash scripts/clone_docs.sh

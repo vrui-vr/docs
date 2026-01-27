@@ -4,8 +4,12 @@ site_url: https://vrui-vr.github.io/docs/
 repo_url: https://github.com/vrui-vr
 repo_name: vrui-vr
 
+# note that files from the .github repo need to be manually added to the nav below
 nav:
-  - Home: index.md
+  - Home:
+      - index.md
+      - Contributing: CONTRIBUTING.md
+      - Code of Conduct: CODE_OF_CONDUCT.md
 
 plugins: # https://github.com/mkdocs/catalog?tab=readme-ov-file#-theming
   - search
@@ -20,6 +24,7 @@ validation:
 markdown_extensions:
   - abbr
   - admonition # https://3os.org/utilities/markdown-cheatsheet/admonition/#supported-types
+  - gh-admonitions # convert GitHub style alerts (> note) to standard mkdocs admonitions (!!! note)
   - footnotes
   - tables
   # https://facelessuser.github.io/pymdown-extensions
