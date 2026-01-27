@@ -69,9 +69,6 @@ for REPO_PATH in "${REPOS[@]}"; do
   else
     echo "⚠️ Skipping $REPO_NAME: no docs directory found"
   fi
-
-  # if this is the .github* repo, also link CODE_OF_CONDUCT.md and CONTRIBUTING.md
-
 done
 
 echo "Generating mkdocs.yml..."
