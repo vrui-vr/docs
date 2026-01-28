@@ -13,6 +13,7 @@ nav:
 
 plugins: # https://github.com/mkdocs/catalog?tab=readme-ov-file#-theming
   - search
+  - gh-admonitions # convert GitHub style alerts (> note) to standard mkdocs admonitions (!!! note)
   # - social
   # - smarty
 
@@ -24,7 +25,6 @@ validation:
 markdown_extensions:
   - abbr
   - admonition # https://3os.org/utilities/markdown-cheatsheet/admonition/#supported-types
-  - gh-admonitions # convert GitHub style alerts (> note) to standard mkdocs admonitions (!!! note)
   - footnotes
   - tables
   # https://facelessuser.github.io/pymdown-extensions
