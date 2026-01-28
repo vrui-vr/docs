@@ -5,4 +5,6 @@ dependencies:
   - pyyaml
   - mkdocs
   - mkdocs-material
+  - pip:
+    - mkdocs-github-admonitions-plugin
 prefix: /opt/homebrew/Caskroom/miniforge/base/envs/vrui
