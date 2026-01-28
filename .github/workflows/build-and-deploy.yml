@@ -21,13 +21,14 @@ jobs:
       - name: Checkout main repo
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Set up Conda
+        uses: conda-incubator/setup-miniconda@v3
         with:
-          python-version: '3.12'
+            auto-activate-base: true
+            activate-environment: vrui
 
       - name: Install dependencies
-        run: pip install mkdocs mkdocs-material pyyaml mkdocs-github-admonitions-plugin
+        run: conda env update --file environment.yaml --name vrui
 
       - name: Clone and stage external docs
         run: bash scripts/clone_docs.sh
