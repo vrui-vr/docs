@@ -5,8 +5,7 @@ mkdocs.generated.yml
 docs/arsandbox
 docs/vrui
 docs/kinect
-# docs/3dvisualizer 
-# ^needed if testing?
+docs/3dvisualizer 
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
