@@ -80,7 +80,7 @@ You can (AND SHOULD) test any changes to the documentation site locally by follo
    conda activate vrui
    ```
 
-4. Run `./scripts/local-build-and-serve.sh` from the root of *this* repository. This will create symbolic links to the `docs/` directories of all repos listed in `repos.txt` if you have a local version of that repo, then it will generate the merged `mkdocs.generated.yml` file, and then start a local MkDocs server. When finished, it will clean up the symbolic links.
+4. Run `./scripts/local_build_and_serve.sh` from the root of *this* repository. This will create symbolic links to the `docs/` directories of all repos listed in `repos.txt` if you have a local version of that repo, then it will generate the merged `mkdocs.generated.yml` file, and then start a local MkDocs server. When finished, it will clean up the symbolic links.
 
 Example output:
 ```

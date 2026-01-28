@@ -5,6 +5,11 @@ mkdocs.generated.yml
 docs/arsandbox
 docs/vrui
 docs/kinect
+docs/3dvisualizer 
+docs/CODE_OF_CONDUCT.md
+docs/CONTRIBUTING.md
+docs/assets/GitHub_Header_Discussions.png
+docs/assets/GitHub_Header_Issues.png
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
